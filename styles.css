@@ -66,10 +66,15 @@
 }
 
 body {
-    background-image: url(assets/images/background-desktop.png);
+    background-image: url(assets/images/background-desktop.png), url(assets/images/pattern-lines.svg);
+    background-size: cover, contain; 
+    background-repeat: no-repeat, no-repeat; 
+    background-attachment: fixed, scroll;
     color: var(--Neutral-300);
     min-height: 100vh;
     font-family: 'Inconsolata';
+    overflow-x: hidden;
+    width: 100%;
 }
 
 main {
@@ -78,6 +83,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .xl-text {
@@ -162,10 +168,11 @@ form .label1 input{
 
 form .label1 .upload-area {
     width: 450px;
-    max-width: 400px;
-    height: 100px;
-    border: 2px dashed #ccc;
+    max-width: 550px;
+    height: 150px;
+    border: 2px dashed var(--Neutral-500);
     border-radius: 10px;
+    background-color: var(--Neutral-900);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -174,6 +181,22 @@ form .label1 .upload-area {
     text-align: center;
     margin: 10px auto;
     cursor: pointer;
+    transition: border 1s ease;
+}
+
+form .label input:hover {
+    background-color: var(--Neutral-700);
+    cursor:pointer;
+}
+
+
+form .label1 .upload-area:hover {
+    border-color: var(--Neutral-300);
+    background-color: var(--Neutral-700);
+}
+
+form .label1 .upload-area.dragover {
+    border: 2px solid var(--Neutral-300);
 }
 
 form .label1 .photo-size {
@@ -183,3 +206,95 @@ form .label1 .photo-size {
     gap: 3px;
 }
 
+input[type="text"], input[type="email"] {
+    width: 100%;
+    padding: 10px; 
+    border: 1px solid var(--Neutral-500);
+    background-color: var(--Neutral-900);
+    color: var(--Neutral-300);
+    font-family: 'Inconsolata';
+    font-size: 16px;
+    border-radius: 5px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    transition: border-color 1.5s ease; 
+    margin-top: 12px;
+}
+
+input[type="text"]:focus , input[type="email"]:focus {
+    border-color: var(--Neutral-300);
+}
+
+.submit-form {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: var(--Orange-700);
+    font-family: 'Inconsolata';
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 1.5s ease;
+}
+
+.submit-form:focus {
+    background-color: var(--Orange-500);
+}
+
+.remove-button, .change-button {
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+    font-family: 'Inconsolata';
+    font-size: 14px;
+    background-color: var(--Neutral-700);
+    color: var(--Neutral-300);
+    cursor: pointer;
+}
+
+.remove-button:hover, .change-button:hover {
+    border-color: var(--Neutral-300);
+}
+
+@media (min-width: 360px) {
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    main {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .hero .hero-container {
+        width: 100%;
+    }
+
+    .hero .hero-container h1 {
+        width: 100%;
+        font-size: 30px;
+    }
+
+    .hero .hero-container p {
+        max-width: 100%;
+        font-size: 16px;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        justify-content: center;
+    }
+
+    form .label1 {
+        max-width: 100%;
+    }
+
+    form .label1 .upload-area {
+        max-width: 100%;
+    }
+}

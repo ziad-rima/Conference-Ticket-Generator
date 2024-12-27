@@ -28,9 +28,27 @@
     <form action="" method="post">
 
       <div class="label label1">
-        <label for="avatar" class="md-text">Upload Avatar</label>
-        <div class="upload-area sm-text"><img src="assets/images/icon-upload.svg" alt="upload icon">Drag and drop or click to upload</div>
-        <input type="file" id="avatar" name="photo" accept=".jpg, .jpeg, .png" required>
+        <label for="fileInput" class="md-text">Upload Avatar</label>
+        <div class="upload-area sm-text" id="uploadArea">
+          <img class="preview-image" id="preview" alt="Avatar Preview" 
+               style="display: none; width: 30%; border-radius: 10px;">
+          <div id="uploadText">
+            <img id="uploadImage" src="assets/images/icon-upload.svg" alt="upload icon">
+            <p id="dragDropText">Drag and drop or click to upload</p>
+          </div>
+          
+
+          <div class="button-container">
+            <button class="remove-button" id="removeBtn" style="display: none;">Remove image</button>
+            <button class="change-button" id="changeBtn" style="display: none;">Change image</button>
+          </div>
+
+        </div>
+        
+        <input type="file" id="fileInput" name="photo" accept=".jpg, .jpeg, .png" required>
+        
+        
+
         <div class="photo-size">
           <img src="assets/images/icon-info.svg" alt="info icon">
           <p class="xsm-text">Upload your photo (JPG or PNG, max size: 500KB).</p>
@@ -39,21 +57,100 @@
 
       <div class="label">
         <label for="name">Full Name</label>
-        <input type="text" id="name" name="full-name">
+        <input class="input" type="text" id="name" name="full-name" required>
       </div>
 
       <div class="label">
         <label for="email">Email Address</label>
-        <input type="email" name="email-address" id="email" placeholder="example@email.com">
+        <input class="input" type="email" name="email-address" id="email" placeholder="example@email.com" required>
       </div>
 
       <div class="label">
         <label for="username">GitHub Username</label>
-        <input type="name" id="username" name="github-username" placeholder="@yourusername">
+        <input class="input" type="text" id="username" name="github-username" placeholder="@yourusername" required>
       </div>
 
-      <button type="submit">Generate My Ticket</button>
+      <div class="label">
+        <button type="submit" class="submit-form">Generate My Ticket</button>
+      </div>
+      
     </form>
+
+    <script>
+      const uploadArea = document.getElementById("uploadArea");
+      const fileInput = document.getElementById("fileInput");
+
+      const removeBtn = document.getElementById("removeBtn");
+      const changeBtn = document.getElementById("changeBtn");
+
+      const preview = document.getElementById("preview");
+      const uploadText = document.getElementById("uploadText");
+
+      uploadArea.addEventListener("click", (e) => {
+        e.preventDefault();
+        fileInput.click();
+      })
+
+      uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('dragover');
+      })
+
+      uploadArea.addEventListener("dragleave", () => {
+        uploadArea.classList.remove("dragover");
+      })
+
+      uploadArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('dragover');
+        const file = e.dataTransfer.files[0];
+
+        if (file) {
+          handleFile(file);
+        }
+      })
+
+      fileInput.addEventListener('change', (e) => {
+        e.preventDefault();
+        fileInput.setAttribute('required', true);
+        const file = e.target.files[0];
+        if (file) {
+          handleFile(file);
+        }
+      })
+
+      const handleFile = (file) => {
+        const fileSizeLimit = 500 * 1024;
+
+        if(file.size > fileSizeLimit) {
+          alert("File size exceeds 500KB.");
+          fileInput.value = "";
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          preview.src = e.target.result;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+
+        removeBtn.style.display = "inline-block";
+        changeBtn.style.display = "inline-block";
+        uploadText.style.display = "none";
+      }
+
+      removeBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        fileInput.removeAttribute('required');
+        preview.src = "";
+        preview.style.display = "none";
+        fileInput.value = "";
+        removeBtn.style.display = "none";
+        changeBtn.style.display = "none";
+        uploadText.style.display = "block";
+      })
+    </script>
   </main>
 
   <!-- Form starts -->
