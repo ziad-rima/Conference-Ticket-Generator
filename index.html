@@ -6,26 +6,27 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   
-  <title>Conference ticket generator</title>
+  <title>Conference Ticket Generator</title>
 </head>
 <body>
 
   <main>
+
     <header>
-      <div class="header-container">
+      <div class="header-container" style="display: none;">
         <img src="assets/images/logo-mark.svg" alt="github icon">
         <h3>Coding Conf</h3>
       </div>     
     </header>
 
-    <div class="hero">
+    <div class="hero" style="display: none;">
       <div class="hero-container">
         <h1 class="xl-text">Your Journey to Coding Conf 2025 Starts Here!</h1>
         <p class="l-text">Secure your spot at next year's biggest coding conference.</p>
       </div>
     </div>
 
-    <form action="" method="post">
+    <form action="ticket.html" method="post" id="userForm" style="display: none;">
 
       <div class="label label1">
         <label for="fileInput" class="md-text">Upload Avatar</label>
@@ -76,100 +77,43 @@
       
     </form>
 
-    <script>
-      const uploadArea = document.getElementById("uploadArea");
-      const fileInput = document.getElementById("fileInput");
+    <div id="display-data" class="display-data">
+      <img class="logo" src="assets/images/logo-full.svg" alt="logo">
+      <div class="heading">
+        <h1>Congrats, <span id="header-name" class="gradient-text">! Your ticket is ready.</span></h1>
+        <p>We've emailed your ticket to <span id="display-email" class="header-email"></span>and will send updates in the run up to the event.</p>
+      </div>
 
-      const removeBtn = document.getElementById("removeBtn");
-      const changeBtn = document.getElementById("changeBtn");
+      <div class="ticket-container">
+        <div class="logo">
+          <img src="assets/images/logo-mark.svg" alt="mark">
+          Coding Conf
+        </div>
 
-      const preview = document.getElementById("preview");
-      const uploadText = document.getElementById("uploadText");
+        <p class="date">Jan 31, 2025 / Austin, TX</p>
+        <div class="ticket-user">
+          <img id="display-image" src="" alt="">
+          <div class="user-info">
+            <span id="display-name"></span>
+            <div class="github-username">
+              <img src="assets/images/icon-github.svg" alt="github icon">
+              <span id="display-github"></span>
+            </div>
+          </div>
+        </div>
 
-      uploadArea.addEventListener("click", (e) => {
-        e.preventDefault();
-        fileInput.click();
-      })
+        <p class="ticket-number">#01609</p>
 
-      uploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        uploadArea.classList.add('dragover');
-      })
-
-      uploadArea.addEventListener("dragleave", () => {
-        uploadArea.classList.remove("dragover");
-      })
-
-      uploadArea.addEventListener("drop", (e) => {
-        e.preventDefault();
-        uploadArea.classList.remove('dragover');
-        const file = e.dataTransfer.files[0];
-
-        if (file) {
-          handleFile(file);
-        }
-      })
-
-      fileInput.addEventListener('change', (e) => {
-        e.preventDefault();
-        fileInput.setAttribute('required', true);
-        const file = e.target.files[0];
-        if (file) {
-          handleFile(file);
-        }
-      })
-
-      const handleFile = (file) => {
-        const fileSizeLimit = 500 * 1024;
-
-        if(file.size > fileSizeLimit) {
-          alert("File size exceeds 500KB.");
-          fileInput.value = "";
-          return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          preview.src = e.target.result;
-          preview.style.display = "block";
-        };
-        reader.readAsDataURL(file);
-
-        removeBtn.style.display = "inline-block";
-        changeBtn.style.display = "inline-block";
-        uploadText.style.display = "none";
-      }
-
-      removeBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        fileInput.removeAttribute('required');
-        preview.src = "";
-        preview.style.display = "none";
-        fileInput.value = "";
-        removeBtn.style.display = "none";
-        changeBtn.style.display = "none";
-        uploadText.style.display = "block";
-      })
-    </script>
+      </div>
+    </div>
+    <script src="form.js"></script>
   </main>
 
-  <!-- Form starts -->
+    
+
 
   
-  
 
-  <!-- Form ends -->
-
-  <!-- Generated tickets starts -->
-
-  Congrats, <!-- Full Name -->! Your ticket is ready.
-
-  We've emailed your ticket to <!-- Email Address --> and will send updates in the run up to the event.
-
-  Coding Conf
-  Jan 31, 2025 / Austin, TX
-
-  <!-- Generated tickets ends -->
   
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 

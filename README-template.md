@@ -159,6 +159,10 @@ As for the script, for now, it handles the upload area, where I set the display 
     uploadText.style.display = "none";
   }
 ```
+I then decided to create a separate JavaScript file and move the script code to that file.
+
+I thought I should handle the congrats page separately as well, but as the code became messy, I stepped back and included the second page within the main index.html file.
+
 
 ### Built with
 
