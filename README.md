@@ -180,7 +180,7 @@ This is how I handled the validation of file type:
     }
 ``` 
 
-When I got to the part when the user clicks the submit button, I realized I should've taken a slightly different approach to validating the file type and inputs, I wrote separate functions for both: 
+When I got to the part where the user clicks the submit button, I realized I should've taken a slightly different approach to validating the file type and inputs, I wrote separate functions for both: 
 
 ```js
   const validateFileType = () => {
@@ -232,28 +232,28 @@ When I got to the part when the user clicks the submit button, I realized I shou
 
 I learned about `FileReader()` API in JavaScript, which is a built-in object used to read the content of files in different formats (text, data URLs, or binary data), and to process the file data before displaying or uploading it. 
 I learned three of its properties:
-  1- `FileReader.result`: contains the result of the file read operation, and its type depends on the method used (`readAsText`, `readAsDataURL`, etc.)
-  2- `FileReader.readyState`: represents the state of the reader.
+- `FileReader.result`: contains the result of the file read operation, and its type depends on the method used (`readAsText`, `readAsDataURL`, etc.)
+- `FileReader.readyState`: represents the state of the reader.
                                 - `0` (EMPTY): No data loaded yet.
                                 - `1` (LOADING): Data is currently being read.
                                 - `2` (DONE): Reading operation completed. 
-  3- `FileReader.error`: contains any error that occured during the read operation.
+- `FileReader.error`: contains any error that occured during the read operation.
 
 Along with three other methods:
-  1- `readAsText(file)`: reads the file as plain text, reading `.txt` files for example.
-  2- `readAsDataURL(file)`: reads the file as a base64-encoded string (used for embedding images or other media directly in HTML). And this is the method I used to read the uploaded photo.
-  3- `abort()`: cancels the current read operation.
+- `readAsText(file)`: reads the file as plain text, reading `.txt` files for example.
+- `readAsDataURL(file)`: reads the file as a base64-encoded string (used for embedding images or other media directly in HTML). And this is the method I used to read the uploaded photo.
+- `abort()`: cancels the current read operation.
 
 And some events:
-  1- `onload`: triggered when the read operation successfully completes.
-  2- `onerror`: triggered if an error occured during the read operation.
-  3- `onprogress`: triggered periodically while the read operation is in progress (useful for showing a loading bar).
-  4- `onabort`: triggered when the `abort()` method is called.
+- `onload`: triggered when the read operation successfully completes.
+- `onerror`: triggered if an error occured during the read operation.
+- `onprogress`: triggered periodically while the read operation is in progress (useful for showing a loading bar).
+- `onabort`: triggered when the `abort()` method is called.
 
 Real-Life Applications: 
-  1- **Image Previews**: allow users to see the image they're uploading before submission.
-  2- **File Validation**: Read and check the file's content.
-  3- **Drag-and-Drop File Upload**: Process files uploaded via drag-and-drop.
+- **Image Previews**: allow users to see the image they're uploading before submission.
+- **File Validation**: Read and check the file's content.
+- **Drag-and-Drop File Upload**: Process files uploaded via drag-and-drop.
   
 
 
