@@ -1,3 +1,4 @@
+const form = document.getElementById("submit-form");
 const uploadArea = document.getElementById("uploadArea");
 const fileInput = document.getElementById("fileInput");
 
@@ -7,8 +8,51 @@ const changeBtn = document.getElementById("changeBtn");
 const preview = document.getElementById("preview");
 const uploadText = document.getElementById("uploadText");
 
-uploadArea.addEventListener("click", (e) => {
-    e.preventDefault();
+const textInputs = document.querySelectorAll(".required");
+
+
+const formData = {
+    image: '',
+    name: '',
+    email: '',
+    githubUsername: ''
+}
+
+const validateFileType = (file) => {
+    const fileSizeLimit = 500 * 1024;
+    const validTypes = ['image/jpeg', 'image/png'];
+    const isValid = true;
+
+    if(file.size > fileSizeLimit) {
+        alert("File size exceeds 500KB.");
+        fileInput.value = "";
+        isValid = false;
+        return;
+    }else if (!validTypes.includes(file.type)) {
+        alert("File type not supported. Upload a png or jpeg");
+        fileInput.value = "";
+        isValid = false;
+        return;
+    }
+    return isValid;
+}
+
+const validateTextInputs = () => {
+    let isValid = true;
+
+    textInputs.forEach((input) => {
+        if (input.value.trim() === "") {
+            input.classList.add("error");
+            alert("Invalid or empty input");
+            isValid = false;
+        } else {
+            input.classList.remove("error");
+        }
+    })
+    return isValid
+}
+
+uploadArea.addEventListener("click", () => {
     fileInput.click();
 })
 
@@ -41,14 +85,6 @@ fileInput.addEventListener('change', (e) => {
 })
 
 const handleFile = (file) => {
-    const fileSizeLimit = 500 * 1024;
-
-    if(file.size > fileSizeLimit) {
-        alert("File size exceeds 500KB.");
-        fileInput.value = "";
-        return;
-    }
-
     const reader = new FileReader();
     reader.onload = (e) => {
         preview.src = e.target.result;
@@ -61,9 +97,15 @@ const handleFile = (file) => {
     uploadText.style.display = "none";
 }
 
+changeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    fileInput.click();
+})
+
 removeBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    fileInput.removeAttribute('required');
+    e.stopPropagation();
     preview.src = "";
     preview.style.display = "none";
     fileInput.value = "";
@@ -72,28 +114,31 @@ removeBtn.addEventListener("click", (e) => {
     uploadText.style.display = "block";
 })
 
-document.getElementById("userForm").addEventListener('submit', (e) => {
-    e.preventDefault();
-    const previewImage = document.getElementById("preview").value;
-    const fullName = document.getElementById("name").value;
-    const emailAddress = document.getElementById("email").value;
-    const githubUsername = document.getElementById("username").value;
+const storeAndDisplayFormData = () => {
+    formData.image = preview.src;
+    formData.name = document.getElementById('name').value.trim();
+    formData.email = document.getElementById('email').value.trim();
+    formData.githubUsername = document.getElementById('username').value.trim();
 
-    sessionStorage.setItem('previewImage', previewImage);
-    sessionStorage.setItem('fullName', fullName);
-    sessionStorage.setItem('emailAddress', emailAddress);
-    sessionStorage.setItem('githubUsername', githubUsername);
+    document.getElementById('header-name').textContent = formData.name;
+    document.getElementById('display-email').textContent = formData.email;
+    document.getElementById('display-image').src = formData.image;
+    document.getElementById('display-name').textContent = formData.name;
+    document.getElementById('display-github').textContent = formData.githubUsername;
+}
 
-    window.location.href = 'ticket.html';
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    
+    const isInputValid = validateTextInputs();
+    const isTypeValid = validateFileType();
 
-    const storedFullName = sessionStorage.getItem('fullName');
-    const storedEmail = sessionStorage.getItem('email');
-    const storedGitHubUsername = sessionStorage.getItem('githubUsername');
-
-    document.getElementById("congratsMessage").innerHTML = `Congrats, ${storedFullName}! Your ticket is ready.`;
-document.getElementById("emailedTicket").innerHTML = `We've emailed your ticket to ${storedEmail} and will send updates in the run up to the event.`
-
+    if (isInputValid && validateFileType) {
+        storeAndDisplayFormData();
+        document.getElementById('header').classList.add("hide");
+        document.getElementById('hero').classList.add("hide");
+        document.getElementById('userForm').classList.add("hide");
+        document.getElementById('display-data').style.display = 'block';
+    }
 })
-
-
 

@@ -163,6 +163,33 @@ I then decided to create a separate JavaScript file and move the script code to 
 
 I thought I should handle the congrats page separately as well, but as the code became messy, I stepped back and included the second page within the main index.html file.
 
+In the script file, I fixed some issues I ran into initially, one of which was that whenever the user removes an image, it retriggers the click button and it opens the user's file explorer again, the reason for that was that I did not stop propagation, so I did: 
+```js
+  removeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    ...
+})
+```
+`e.stopPropagation()` prevents the event from triggering event listeners attached to parent elements (in this case, `uploadArea.addEventListener("click", () => {fileInput.click();})`). 
+
+This is how I handled the validation of file type:
+```js
+    const fileSizeLimit = 500 * 1024;
+    const validTypes = ['image/jpeg', 'image/png'];
+
+    if(file.size > fileSizeLimit) {
+        alert("File size exceeds 500KB.");
+        fileInput.value = "";
+        return;
+    }else if (!validTypes.includes(file.type)) {
+        alert("File type not supported. Upload a png or jpeg");
+        fileInput.value = "";
+        return;
+    }
+``` 
+
+
 
 ### Built with
 

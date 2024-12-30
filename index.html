@@ -12,27 +12,27 @@
 
   <main>
 
-    <header>
-      <div class="header-container" style="display: none;">
+    <header id="header">
+      <div class="header-container">
         <img src="assets/images/logo-mark.svg" alt="github icon">
         <h3>Coding Conf</h3>
       </div>     
     </header>
 
-    <div class="hero" style="display: none;">
+    <div class="hero" id="hero">
       <div class="hero-container">
         <h1 class="xl-text">Your Journey to Coding Conf 2025 Starts Here!</h1>
         <p class="l-text">Secure your spot at next year's biggest coding conference.</p>
       </div>
     </div>
 
-    <form action="ticket.html" method="post" id="userForm" style="display: none;">
+    <form action="" method="post" id="userForm">
 
       <div class="label label1">
         <label for="fileInput" class="md-text">Upload Avatar</label>
         <div class="upload-area sm-text" id="uploadArea">
           <img class="preview-image" id="preview" alt="Avatar Preview" 
-               style="display: none; width: 30%; border-radius: 10px;">
+               style="display: none; width: 50px; height: 50px; border-radius: 10px;">
           <div id="uploadText">
             <img id="uploadImage" src="assets/images/icon-upload.svg" alt="upload icon">
             <p id="dragDropText">Drag and drop or click to upload</p>
@@ -58,26 +58,26 @@
 
       <div class="label">
         <label for="name">Full Name</label>
-        <input class="input" type="text" id="name" name="full-name" required>
+        <input class="input required" type="text" id="name" name="full-name" required>
       </div>
 
       <div class="label">
         <label for="email">Email Address</label>
-        <input class="input" type="email" name="email-address" id="email" placeholder="example@email.com" required>
+        <input class="input required" type="email" name="email-address" id="email" placeholder="example@email.com" required>
       </div>
 
       <div class="label">
         <label for="username">GitHub Username</label>
-        <input class="input" type="text" id="username" name="github-username" placeholder="@yourusername" required>
+        <input class="input required" type="text" id="username" name="github-username" placeholder="@yourusername" required>
       </div>
 
       <div class="label">
-        <button type="submit" class="submit-form">Generate My Ticket</button>
+        <button type="submit" class="submit-form" id="submit-form">Generate My Ticket</button>
       </div>
       
     </form>
 
-    <div id="display-data" class="display-data">
+    <div id="display-data" class="display-data" style="display: none;">
       <img class="logo" src="assets/images/logo-full.svg" alt="logo">
       <div class="heading">
         <h1>Congrats, <span id="header-name" class="gradient-text">! Your ticket is ready.</span></h1>

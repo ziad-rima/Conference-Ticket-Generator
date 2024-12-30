@@ -74,6 +74,22 @@ body {
     width: 100%;
 }
 
+main header.hide {
+    display: none;
+}
+
+main .hero.hide {
+    display: none;
+}
+
+main form.hide {
+    display: none;
+}
+
+form input.error {
+    border: 2px solid var(--Neutral-500);
+}
+
 main {
     max-width: 100%;
     display: flex;
@@ -344,9 +360,68 @@ input[type="text"]:focus , input[type="email"]:focus {
     transform: rotate(90deg);
 }
 
+@media (max-width: 539px) {
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    main {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .hero .hero-container {
+        width: 100%;
+    }
+
+    .hero .hero-container h1 {
+        width: 100%;
+        font-size: 40px;
+    }
+
+    .hero .hero-container p {
+        max-width: 100%;
+        font-size: 16px;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        justify-content: center;
+    }
+
+    form .label1 {
+        max-width: 100%;
+    }
+
+    form .label1 .upload-area {
+        max-width: 100%;
+    }
+}
 
 /* for .display-data container*/
 @media (max-width: 540px) {
+
+    .hero .hero-container {
+        width: 100%;
+    }
+
+    .hero .hero-container h1 {
+        width: 100%;
+        font-size: 40px;
+    }
+
+    .hero .hero-container p {
+        max-width: 100%;
+        font-size: 16px;
+        margin-top: 10px;
+        text-align: center;
+    }
+
     .display-data {
         padding: 0;
     }
@@ -376,47 +451,4 @@ input[type="text"]:focus , input[type="email"]:focus {
         right: -8px;
     }
 
-}
-
-@media (min-width: 360px) {
-    body {
-        max-width: 100%;
-        overflow-x: hidden;
-    }
-
-    main {
-        max-width: 100%;
-        overflow-x: hidden;
-    }
-
-    .hero .hero-container {
-        width: 100%;
-    }
-
-    .hero .hero-container h1 {
-        width: 100%;
-        font-size: 30px;
-    }
-
-    .hero .hero-container p {
-        max-width: 100%;
-        font-size: 16px;
-        margin-top: 10px;
-        text-align: center;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        max-width: 100%;
-        justify-content: center;
-    }
-
-    form .label1 {
-        max-width: 100%;
-    }
-
-    form .label1 .upload-area {
-        max-width: 100%;
-    }
 }
