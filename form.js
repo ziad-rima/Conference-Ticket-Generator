@@ -1,4 +1,4 @@
-const form = document.getElementById("submit-form");
+const form = document.getElementById("userForm");
 const uploadArea = document.getElementById("uploadArea");
 const fileInput = document.getElementById("fileInput");
 
@@ -18,21 +18,22 @@ const formData = {
     githubUsername: ''
 }
 
-const validateFileType = (file) => {
+const validateFileType = () => {
+    const file = fileInput.files[0];
+    if (!file) return false;
+    
     const fileSizeLimit = 500 * 1024;
     const validTypes = ['image/jpeg', 'image/png'];
-    const isValid = true;
+    let isValid = true;
 
     if(file.size > fileSizeLimit) {
         alert("File size exceeds 500KB.");
         fileInput.value = "";
         isValid = false;
-        return;
-    }else if (!validTypes.includes(file.type)) {
+    } else if (!validTypes.includes(file.type)) {
         alert("File type not supported. Upload a png or jpeg");
         fileInput.value = "";
         isValid = false;
-        return;
     }
     return isValid;
 }
@@ -42,11 +43,10 @@ const validateTextInputs = () => {
 
     textInputs.forEach((input) => {
         if (input.value.trim() === "") {
-            input.classList.add("error");
             alert("Invalid or empty input");
             isValid = false;
         } else {
-            input.classList.remove("error");
+            isValid = true;
         }
     })
     return isValid
@@ -131,9 +131,9 @@ form.addEventListener('submit', (e) => {
     e.preventDefault()
     
     const isInputValid = validateTextInputs();
-    const isTypeValid = validateFileType();
+    const isFileValid = validateFileType();
 
-    if (isInputValid && validateFileType) {
+    if (isInputValid && isFileValid) {
         storeAndDisplayFormData();
         document.getElementById('header').classList.add("hide");
         document.getElementById('hero').classList.add("hide");

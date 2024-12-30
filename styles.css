@@ -57,12 +57,12 @@
 }
 
 .attribution {
-    font-size: 11px; 
+    font-size: 16px; 
     text-align: center;
 }
 
 .attribution a { 
-    color: hsl(228, 45%, 44%); 
+    color: hsl(228, 34%, 52%); 
 }
 
 body {
@@ -424,6 +424,10 @@ input[type="text"]:focus , input[type="email"]:focus {
 
     .display-data {
         padding: 0;
+    }
+
+    .display-data .coding-conf {
+        margin-top: 1.2rem;
     }
 
     .display-data .heading p {
