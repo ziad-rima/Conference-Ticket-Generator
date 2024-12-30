@@ -35,7 +35,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](/Frontend%20Mentor/Conference%20Ticket%20Generator/assets/images/Screenshot.png)
+![](./assets/images/Screenshot.png)
 
 
 ### Links
